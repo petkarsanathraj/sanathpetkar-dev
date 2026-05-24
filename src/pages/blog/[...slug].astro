@@ -1,0 +1,87 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+import "../../styles/prose.css";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout title={`${post.data.title} — Sanath Raj Petkar`} description={post.data.description}>
+  <Nav />
+
+  <article class="pt-32 pb-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <a
+        href="/blog/"
+        class="inline-block mb-8 font-mono text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-accent)] transition-colors"
+      >
+        ← back to writing
+      </a>
+
+      <header class="mb-12 max-w-3xl">
+        <div class="flex flex-wrap items-center gap-3 mb-5 font-mono text-xs text-[color:var(--color-text-dim)]">
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {dateFmt.format(post.data.publishedAt)}
+          </time>
+          {
+            post.data.readingTimeMin && (
+              <>
+                <span>·</span>
+                <span>{post.data.readingTimeMin} min read</span>
+              </>
+            )
+          }
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-5">
+          {post.data.title}
+        </h1>
+        <p class="text-lg text-[color:var(--color-text-muted)] leading-relaxed">
+          {post.data.description}
+        </p>
+        <div class="flex flex-wrap gap-2 mt-6">
+          {
+            post.data.tags.map((t) => (
+              <span class="px-2 py-1 text-xs font-mono text-[color:var(--color-text-muted)] bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded">
+                {t}
+              </span>
+            ))
+          }
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content />
+      </div>
+
+      <hr class="my-16 border-[color:var(--color-border)]" />
+
+      <div class="max-w-3xl">
+        <p class="text-[color:var(--color-text-muted)]">
+          Written by <strong class="text-[color:var(--color-text)]">Sanath Raj Petkar</strong> — freelance React Native
+          developer specializing in native modules and hardware integrations.
+          <a href="/#contact" class="text-[color:var(--color-accent)] hover:underline">Available for work</a> ·
+          <a href="https://github.com/petkarsanathraj" class="text-[color:var(--color-accent)] hover:underline" target="_blank" rel="noopener">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <Footer />
+</Layout>

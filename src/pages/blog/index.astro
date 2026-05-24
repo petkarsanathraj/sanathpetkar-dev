@@ -1,0 +1,71 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Nav from "../../components/Nav.astro";
+import Footer from "../../components/Footer.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<Layout
+  title="Blog — Sanath Raj Petkar"
+  description="Writing about React Native, native modules, hardware integration, and the messy real-world bugs nobody warns you about."
+>
+  <Nav />
+
+  <main class="pt-32 pb-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-3">
+        Writing
+      </h1>
+      <p class="text-[color:var(--color-text-muted)] text-lg max-w-2xl mb-12">
+        Notes from shipping React Native, native modules, and hardware-integrated
+        apps. No fluff — the bugs I hit and what actually worked.
+      </p>
+
+      {
+        posts.length === 0 ? (
+          <p class="text-[color:var(--color-text-muted)]">
+            No posts yet. First one is coming soon.
+          </p>
+        ) : (
+          <div class="space-y-6">
+            {posts.map((post) => (
+              <a
+                href={`/blog/${post.id}/`}
+                class="block p-6 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] hover:border-[color:var(--color-text-muted)] transition-colors"
+              >
+                <div class="flex flex-wrap items-baseline justify-between gap-2 mb-2">
+                  <h2 class="text-xl font-semibold">{post.data.title}</h2>
+                  <span class="font-mono text-xs text-[color:var(--color-text-dim)]">
+                    {dateFmt.format(post.data.publishedAt)}
+                  </span>
+                </div>
+                <p class="text-[color:var(--color-text-muted)] mb-4">
+                  {post.data.description}
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.map((t) => (
+                    <span class="px-2 py-1 text-xs font-mono text-[color:var(--color-text-muted)] bg-[color:var(--color-surface-2)] border border-[color:var(--color-border)] rounded">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
