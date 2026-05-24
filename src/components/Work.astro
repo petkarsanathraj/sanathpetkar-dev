@@ -1,0 +1,93 @@
+---
+const projects = [
+  {
+    type: "Open source",
+    title: "react-native-usb-serial-android",
+    blurb:
+      "Modern USB Serial communication for React Native on Android. Correct permission handling for Android 12 / 13 / 14+ — most existing libraries crash on those versions because of stale PendingIntent flags. Clean React hook API. Built on top of usb-serial-for-android.",
+    stack: ["Kotlin", "TypeScript", "React Native", "Android USB Host"],
+    links: [
+      { label: "GitHub", href: "https://github.com/petkarsanathraj/react-native-usb-serial-android" },
+    ],
+    accent: "live",
+  },
+  {
+    type: "Client work",
+    title: "Industrial USB-OTG measurement app",
+    blurb:
+      "Production Android app for field engineers using USB-OTG-connected tower & transformer testing equipment. Custom Kotlin native module bridging USB serial to a React Native UI. Real-time data streaming, GPS-tagged readings, CSV export, offline-first storage. Shipped to internal users in the field.",
+    stack: ["React Native", "Kotlin (native module)", "USB Serial", "MMKV", "Geolocation"],
+    links: [],
+    accent: "shipped",
+  },
+  {
+    type: "Product work",
+    title: "Cross-platform mobile app from scratch",
+    blurb:
+      "Led the React Native side of a consumer health & fitness product from inception to launch on App Store + Play Store. Set up the CI pipeline, native module conventions, push notification stack, in-app purchase flow, and Sentry / analytics tooling. Cross-platform from day one.",
+    stack: ["React Native", "TypeScript", "Native iOS / Android", "Sentry", "Fastlane"],
+    links: [],
+    accent: "shipped",
+  },
+];
+---
+
+<section id="work" class="py-20 px-6 border-t border-[color:var(--color-border)]">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-sm font-mono text-[color:var(--color-accent)] mb-3">/ work</h2>
+    <p class="text-2xl sm:text-3xl font-semibold mb-12 max-w-2xl">
+      Selected projects.
+    </p>
+
+    <div class="space-y-4">
+      {
+        projects.map((p) => (
+          <article class="group p-6 sm:p-8 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] hover:border-[color:var(--color-text-muted)] transition-colors">
+            <div class="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-xs text-[color:var(--color-text-dim)]">
+                  {p.type}
+                </span>
+                <span class="inline-flex items-center gap-1.5 font-mono text-xs text-[color:var(--color-accent)]">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)]" />
+                  {p.accent}
+                </span>
+              </div>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-semibold mb-3 font-mono">
+              {p.title}
+            </h3>
+
+            <p class="text-[color:var(--color-text-muted)] leading-relaxed mb-5 max-w-3xl">
+              {p.blurb}
+            </p>
+
+            <div class="flex flex-wrap items-center gap-2 mb-5">
+              {p.stack.map((s) => (
+                <span class="px-2 py-1 text-xs font-mono text-[color:var(--color-text-muted)] bg-[color:var(--color-surface-2)] border border-[color:var(--color-border)] rounded">
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            {p.links.length > 0 && (
+              <div class="flex flex-wrap gap-4">
+                {p.links.map((l) => (
+                  <a
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-sm text-[color:var(--color-accent)] hover:underline"
+                  >
+                    {l.label} →
+                  </a>
+                ))}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

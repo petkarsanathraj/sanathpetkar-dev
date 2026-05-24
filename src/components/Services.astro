@@ -1,0 +1,44 @@
+---
+const services = [
+  {
+    title: "React Native app development",
+    desc: "Zero-to-launch product builds. From wireframes to App Store and Play Store — with CI/CD, crash reporting, analytics, and a codebase that won't fall apart at month six.",
+    tag: "01 / Build",
+  },
+  {
+    title: "Native module integration",
+    desc: "When stock React Native isn't enough. Kotlin and Swift bridges for USB serial, Bluetooth, MFi accessories, NFC, custom protocols, and hardware nobody else wants to touch.",
+    tag: "02 / Native bridge",
+  },
+  {
+    title: "React Native rescue work",
+    desc: "Half-broken codebases, mysterious performance regressions, repeated App Store rejections. Bring me in when there's a deadline and you need senior help fast.",
+    tag: "03 / Rescue",
+  },
+];
+---
+
+<section class="py-20 px-6 border-t border-[color:var(--color-border)]">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-sm font-mono text-[color:var(--color-accent)] mb-3">/ services</h2>
+    <p class="text-2xl sm:text-3xl font-semibold mb-12 max-w-2xl">
+      What I help teams ship.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {
+        services.map((s) => (
+          <div class="group p-6 rounded-lg border border-[color:var(--color-border)] bg-[color:var(--color-surface)] hover:border-[color:var(--color-text-muted)] transition-colors">
+            <div class="font-mono text-xs text-[color:var(--color-text-dim)] mb-4">
+              {s.tag}
+            </div>
+            <h3 class="text-lg font-semibold mb-3">{s.title}</h3>
+            <p class="text-sm text-[color:var(--color-text-muted)] leading-relaxed">
+              {s.desc}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

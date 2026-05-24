@@ -1,0 +1,60 @@
+---
+const stack = [
+  "React Native",
+  "TypeScript",
+  "Kotlin",
+  "Swift",
+  "Expo",
+  "Node.js",
+  "Fastlane",
+  "Sentry",
+  "Git / GitHub",
+];
+---
+
+<section id="about" class="py-20 px-6 border-t border-[color:var(--color-border)]">
+  <div class="max-w-5xl mx-auto">
+    <div class="grid lg:grid-cols-[1fr_2fr] gap-12">
+      <div>
+        <h2 class="text-sm font-mono text-[color:var(--color-accent)] mb-3">/ about</h2>
+        <p class="text-2xl sm:text-3xl font-semibold">A bit about me.</p>
+      </div>
+
+      <div class="space-y-5 text-[color:var(--color-text-muted)] leading-relaxed">
+        <p>
+          I'm a React Native developer based in India. Over the past four years I've
+          shipped production mobile apps end-to-end — wireframes through App Store and
+          Play Store — and built the kind of native module work most React Native devs
+          actively avoid.
+        </p>
+        <p>
+          My favourite projects sit at the intersection of mobile and hardware: USB-OTG
+          accessories, Bluetooth peripherals, embedded devices that need a phone-side
+          UI. When a stock React Native library doesn't exist or is broken on modern
+          Android, I write the Kotlin or Swift bridge myself.
+        </p>
+        <p>
+          I work best with small teams that need a senior mobile pair of hands —
+          whether that's a green-field build, a rescue mission on a struggling
+          codebase, or specifically the hard native-module part of an otherwise
+          healthy app.
+        </p>
+
+        <div class="pt-4">
+          <div class="font-mono text-xs text-[color:var(--color-text-dim)] mb-3">
+            // tech I reach for
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {
+              stack.map((s) => (
+                <span class="px-3 py-1 text-sm font-mono text-[color:var(--color-text)] bg-[color:var(--color-surface)] border border-[color:var(--color-border)] rounded">
+                  {s}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
